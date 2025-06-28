@@ -153,6 +153,8 @@ export function isPalindrome(date: string): boolean {
 }
 
 export function skipToNextDay(date: string): string {
+  if (!isValidDate(date)) return date;
+
   const dateSeparated = separateDate(date);
   if (!dateSeparated) return date;
 
@@ -210,22 +212,29 @@ export function getNextPalindromes(
   const nextPalindromes: string[] = [];
   let potentialPalindrome = skipToNextDay(dateFromWhichToStart);
 
-  while (counter < numberOfNextPalindromes) {
+  // Add a failsafe to avoid infinite loops!
+  const MAX_ITERATIONS = 100_000;
+  let tries = 0;
+
+  while (counter < numberOfNextPalindromes && tries < MAX_ITERATIONS) {
+    tries++;
     if (isPalindrome(potentialPalindrome)) {
       nextPalindromes.push(potentialPalindrome);
       counter++;
     }
-
     potentialPalindrome = skipToNextDay(potentialPalindrome);
+  }
+
+  if (tries === MAX_ITERATIONS) {
+    // Too many iterations; likely unreachable
+    return;
   }
 
   if (nextPalindromes.length !== numberOfNextPalindromes) {
     return;
   }
-
   if (nextPalindromes.length === 0) {
     return;
   }
-
   return nextPalindromes;
 }

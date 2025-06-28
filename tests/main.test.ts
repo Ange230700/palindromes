@@ -59,7 +59,7 @@ describe("isValidDate", () => {
 describe("isPalindrome", () => {
   it("identifies palindromic dates", () => {
     expect(isPalindrome("02/02/2020")).toBe(true); // 02022020
-    expect(isPalindrome("12/02/2021")).toBe(false); // 12022021
+    expect(isPalindrome("12/02/2021")).toBe(true); // 12022021
     expect(isPalindrome("12/12/2021")).toBe(false); // 12122021
     expect(isPalindrome("03/02/2030")).toBe(true); // 03022030
   });
@@ -100,7 +100,7 @@ describe("getNextPalindromes", () => {
     // The next two after 02/02/2020 are 12/02/2021 and 03/02/2030
     expect(getNextPalindromes(2, "02/02/2020")).toEqual([
       "12/02/2021",
-      "03/02/2030",
+      "22/02/2022",
     ]);
   });
 
