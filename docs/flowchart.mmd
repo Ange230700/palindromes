@@ -1,0 +1,18 @@
+%% docs\flowchart.mmd
+
+flowchart TD
+    A[Start: Call getNextPalindromes(N, date)] --> B{Is date valid?}
+    B -- No --> C[Return undefined]
+    B -- Yes --> D[Skip to next day]
+    D --> E[Set counter = 0,\ntries = 0,\nmax = 100000]
+    E --> F{counter < N and tries < max?}
+    F -- No --> G{counter == N?}
+    G -- Yes --> H[Return nextPalindromes]
+    G -- No --> I[Return undefined]
+    F -- Yes --> J[isPalindrome(potentialPalindrome)?]
+    J -- Yes --> K[Add to nextPalindromes\ncounter++]
+    J -- No --> L[Do nothing]
+    K --> M[Skip to next day]
+    L --> M
+    M --> N[tries++]
+    N --> F
